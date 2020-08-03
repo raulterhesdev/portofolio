@@ -1,16 +1,43 @@
-#content {
-  display: none;
+// Reset CSS
+* {
+  margin: 0;
+  padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
+input {
+  outline: none;
+}
+
+// Theme
 html {
   // define variables for light mode
+  --background-color: #eeeeee;
+  --primary: #151680;
+  --negative: black;
 }
-
 html[data-theme='dark'] {
   // define variables for dark mode
+  --background-color: #141414;
+  --primary: #375fc0;
+  --negative: white;
 }
 
 // Variables
+$background: var(--background-color);
+$primary: var(--primary);
+$negative: var(--negative);
+$accent: #f78536;
 
+// Content - Initial Setup
 #content {
+  // initially don't display the content
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  background-color: $background;
 }

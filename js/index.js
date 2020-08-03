@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Light/Dark Mode toggle
   var checkbox = document.querySelector('input[name=mode]');
-
   checkbox.addEventListener('change', function () {
     if (this.checked) {
       document.documentElement.setAttribute('data-theme', 'dark');

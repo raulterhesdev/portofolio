@@ -1,2 +1,2 @@
-#content{display:none}#content{background-color:var(--lightBg)}#content h1{color:var(--lightBtn)}
+*{margin:0;padding:0}a{text-decoration:none;color:white}input{outline:none}html{--background-color: #eeeeee;--primary: #151680;--negative: black}html[data-theme='dark']{--background-color: #141414;--primary: #375fc0;--negative: white}#content{display:none;height:100vh;width:100vw;background-color:var(--background-color)}
 /*# sourceMappingURL=style.css.map */
