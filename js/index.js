@@ -104,6 +104,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (message === '') {
       console.log('Message cannot be empty');
     }
+
+    const reg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!reg.test(email)) {
+      console.log('Please enter a valid email address');
+    }
+
+    var template_params = {
+      from_name: name,
+      from_subject: subject,
+      from_email: email,
+      from_message: message,
+    };
+
+    var service_id = 'gmail';
+    var template_id = 'template_hWGS0MWW';
+
+    // emailjsUser;
+    emailjs.send(service_id, template_id, template_params, emailjsUser).then(
+      (result) => {
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
   }
 
   submitButton.addEventListener('click', submitForm);
