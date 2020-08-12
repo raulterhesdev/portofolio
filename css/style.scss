@@ -27,12 +27,26 @@ $secondary: #f9ff21;
 $accent: #ff1f5a;
 
 // Media queries
-$phone: 768px; //max phone width or tablet portrait
-$tablet: 992px; //tablet landscape max
+$small: 360px;
+$phone: 620px; //max phone width or tablet portrait
+$phone-height: 750px;
+$tablet: 1050px; //tablet landscape max
 $laptop: 1200px; //laptops max
+
+@mixin small {
+  @media (max-width: #{$small}) {
+    @content;
+  }
+}
 
 @mixin phone {
   @media (max-width: #{$phone}) {
+    @content;
+  }
+}
+
+@mixin phone-height {
+  @media (max-height:#{$phone-height}) {
     @content;
   }
 }
@@ -55,10 +69,12 @@ $laptop: 1200px; //laptops max
   }
 }
 
+// Font Family
 body {
   font-family: 'Nunito', sans-serif;
 }
 
+// Custom scrollbar
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -72,16 +88,16 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #eabf10aa;
+  background: #eabf1099;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #eabf10dd;
+  background: #eabf10bb;
 }
 
-// Global Button
+// Global main Button
 .main-button {
   padding: 16px 24px;
   font-size: 20px;
@@ -92,6 +108,14 @@ body {
   position: relative;
   z-index: 1;
   transition: all 0.4s ease-in;
+
+  @include phone {
+    font-size: 16px;
+  }
+
+  @include small {
+    font-size: 14px;
+  }
 }
 
 .main-button::before,
@@ -131,11 +155,11 @@ body {
 // Content - Initial Setup
 #content {
   // initially don't display the content
-  // overflow: hidden;
   height: 100vh;
   display: none;
 }
 
+// Navigation
 #content #nav {
   position: absolute;
   bottom: 0;
@@ -153,7 +177,6 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    // transform: translateY(36px);
     transition: all 0.4s ease-in;
     max-width: 25vw;
     border-bottom: 3px solid rgba(0, 0, 0, 0);
@@ -162,20 +185,9 @@ body {
       padding: 18px 36px 12px 36px;
       font-size: 16px;
     }
-
-    // .icon {
-    //   display: none;
-    //   padding: 12px 36px 8px 36px;
-    //   img {
-    //     filter: invert(80%) sepia(29%) saturate(4408%) hue-rotate(4deg)
-    //       brightness(106%) contrast(87%);
-    //     max-width: 23px;
-    //   }
-    // }
   }
 
   .nav-link:hover {
-    // transform: translateY(0);
     background-color: rgba(0, 0, 0, 0.1);
   }
 
@@ -183,10 +195,10 @@ body {
     background-color: rgba(0, 0, 0, 0.2);
     font-weight: bold;
     border-bottom: 3px solid $primary;
-    // transform: translateY(0);
   }
 }
 
+// Hero Section
 #content #hero {
   height: 100vh;
   background-color: $background;
@@ -196,11 +208,8 @@ body {
     'action image';
   padding: 40px;
   overflow: hidden;
-  // padding-bottom: 150px;
 
-  // To Remove
-  display: none;
-
+  // Intro Text
   .intro {
     grid-area: intro;
     color: $white;
@@ -210,22 +219,72 @@ body {
     flex-direction: column;
     z-index: 10;
 
+    @include tablet {
+      margin: 0 auto;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
     .hello {
       margin-bottom: 12px;
       font-size: 3.5em;
+      @include laptop {
+        font-size: 3em;
+      }
+
+      @include phone {
+        font-size: 2.5em;
+      }
+
+      @include small {
+        font-size: 2em;
+      }
     }
 
     .name {
       margin-bottom: 32px;
       font-size: 3em;
+      @include laptop {
+        font-size: 2.5em;
+      }
+      @include phone {
+        font-size: 1.5em;
+      }
+
+      @include small {
+        font-size: 1.3em;
+      }
     }
 
     .job {
       margin-bottom: 12px;
       font-size: 2em;
+
+      @include laptop {
+        font-size: 1.5em;
+      }
+
+      @include phone {
+        font-size: 1.2em;
+      }
+
+      @include small {
+        font-size: 1.1em;
+      }
+    }
+
+    .motto {
+      @include laptop {
+        font-size: 1.2em;
+      }
+
+      @include phone {
+        font-size: 1em;
+      }
     }
   }
 
+  // Action Buttons
   .action-area {
     grid-area: action;
     display: flex;
@@ -234,11 +293,30 @@ body {
     z-index: 10;
     margin-top: 50px;
 
+    @include tablet {
+      justify-content: center;
+      align-items: center;
+      margin: 50px 0 100px 0;
+    }
+
+    @include phone {
+      margin: 30px 0 100px 0;
+    }
+
     .main-button {
       margin-left: 36px;
+
+      @include tablet {
+        margin: 0 auto;
+      }
+
+      @include phone {
+        margin: 0 auto;
+      }
     }
   }
 
+  // Image
   .illustration {
     max-width: 20vw;
     grid-area: image;
@@ -248,6 +326,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @include laptop {
+      max-width: 30vw;
+    }
+
+    @include tablet {
+      margin: 0 auto;
+      max-width: 30vw;
+    }
+
+    @include phone {
+      max-width: 50vw;
+    }
 
     #profile {
       max-width: 100%;
@@ -264,6 +355,14 @@ body {
       padding: 8px;
       border: 2px solid $primary;
     }
+  }
+
+  @include tablet {
+    grid-template-areas:
+      'image'
+      'intro'
+      'action';
+    padding: 4px;
   }
 }
 
@@ -284,13 +383,14 @@ body {
     display: grid;
     max-width: 95%;
     margin: 4px auto;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
     align-self: center;
     justify-content: center;
     grid-gap: 64px;
     margin-top: 18px;
     height: 80vh;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 0 12px;
 
     .project {
@@ -304,6 +404,10 @@ body {
         margin-left: 50px;
         color: $white;
         position: relative;
+
+        @include small {
+          font-size: 0.9em;
+        }
       }
 
       .project-title::before {
@@ -388,20 +492,36 @@ body {
         }
       }
     }
+
+    @include tablet {
+      grid-gap: 32px;
+    }
+
+    @include small {
+      height: 70vh;
+    }
   }
 }
 
 #content #about {
-  display: block;
+  display: none;
   min-height: 100vh;
   background-color: $background;
   overflow: hidden;
+
+  .section-name {
+    margin-top: 50px;
+
+    @include phone {
+      margin-top: 18px;
+    }
+  }
 
   .about-me {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     width: 90vw;
     max-width: 1080px;
     margin: 5vh auto;
@@ -412,6 +532,12 @@ body {
       padding: 12px;
       position: relative;
       margin-bottom: 32px;
+      max-width: 600px;
+
+      @include phone {
+        font-size: 0.9em;
+        margin-bottom: 0;
+      }
     }
 
     .short-intro::before {
@@ -431,7 +557,31 @@ body {
       grid-gap: 80px;
       width: 100%;
       overflow-y: auto;
-      max-height: 50vh;
+      max-height: 60vh;
+      align-items: center;
+      justify-content: center;
+
+      @include laptop {
+        margin-top: 20px;
+      }
+
+      @include phone {
+        margin-top: 20px;
+        display: block;
+      }
+
+      @include phone-height {
+        max-height: 50vh;
+      }
+
+      @include tablet {
+        width: 90%;
+        margin: 20xp auto;
+      }
+
+      @include small {
+        max-height: 40vh;
+      }
 
       .card {
         background-color: rgba(255, 255, 255, 0.1);
@@ -444,6 +594,12 @@ body {
         overflow-x: hidden;
         border-radius: 5px;
 
+        @include phone {
+          padding: 12px 8px;
+          max-width: 350px;
+          margin: 0 auto 12px auto;
+        }
+
         .card-title {
           display: flex;
           flex-direction: column;
@@ -454,12 +610,28 @@ body {
             font-size: 2.5em;
             color: $primary;
             opacity: 0.7;
+
+            @include phone {
+              font-size: 2em;
+            }
+
+            @include small {
+              font-size: 1.5em;
+            }
           }
 
           p {
             font-size: 2em;
             color: $primary;
             padding: 24px 0;
+
+            @include phone {
+              font-size: 1.8em;
+            }
+
+            @include small {
+              padding: 12px 0;
+            }
           }
         }
 
@@ -478,6 +650,10 @@ body {
             display: inline-block;
             padding: 5px;
             font-size: 1.1em;
+
+            @include phone {
+              font-size: 0.9em;
+            }
           }
 
           .card-skill::before,
@@ -501,6 +677,12 @@ body {
           }
         }
       }
+
+      .card:nth-child(3) {
+        @include tablet {
+          grid-column: span 2;
+        }
+      }
     }
   }
 }
@@ -510,13 +692,21 @@ body {
   background-color: $background;
   overflow: hidden;
 
+  .section-name {
+    margin-top: 50px;
+
+    @include phone-height {
+      margin-top: 16px;
+    }
+  }
+
   #form {
     height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: left;
     justify-content: center;
-    width: 40%;
+    width: 70%;
     min-width: 300px;
     max-width: 500px;
     margin: 0 auto;
@@ -526,6 +716,11 @@ body {
       padding: 8px 0px;
       margin-top: 2vh;
       font-size: 1.1em;
+
+      @include phone-height {
+        margin-top: 1vh;
+        font-size: 0.9;
+      }
     }
 
     input,
@@ -539,6 +734,11 @@ body {
       border: 1px solid rgba(0, 0, 0, 0);
       transition: all 0.2s ease-in;
       resize: none;
+
+      @include phone-height {
+        font-size: 0.9;
+        padding: 8px;
+      }
     }
 
     input:focus,

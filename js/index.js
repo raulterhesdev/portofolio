@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const target = event.currentTarget.href.slice(
       event.currentTarget.href.indexOf('#') + 1
     );
-    console.log(target);
     switch (target) {
       case 'hero':
         resetNavigation();
@@ -64,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   projects = document.getElementById('projects');
   contact = document.getElementById('contact');
   about = document.getElementById('about');
+  actionButton = document.getElementById('action-projects');
 
   navHero = document.getElementById('nav-hero');
   navProjects = document.getElementById('nav-projects');
@@ -74,4 +74,37 @@ document.addEventListener('DOMContentLoaded', () => {
   navProjects.addEventListener('click', navigate);
   navContact.addEventListener('click', navigate);
   navAbout.addEventListener('click', navigate);
+  actionButton.addEventListener('click', navigate);
+
+  // Contact form
+  submitButton = document.getElementById('form-submit');
+  formName = document.getElementById('form-name');
+  formEmail = document.getElementById('form-email');
+  formSubject = document.getElementById('form-subject');
+  formMessage = document.getElementById('form-message');
+
+  function submitForm(e) {
+    e.preventDefault();
+    const name = formName.value;
+    const email = formEmail.value;
+    const subject = formSubject.value;
+    const message = formMessage.value;
+
+    console.log(`${name} ${email} ${subject} ${message}`);
+
+    if (name === '') {
+      console.log('Name cannot be empty');
+    }
+    if (email === '') {
+      console.log('Email cannot be empty');
+    }
+    if (subject === '') {
+      console.log('Subject cannot be empty');
+    }
+    if (message === '') {
+      console.log('Message cannot be empty');
+    }
+  }
+
+  submitButton.addEventListener('click', submitForm);
 });
