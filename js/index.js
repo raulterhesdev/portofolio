@@ -90,8 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const subject = formSubject.value;
     const message = formMessage.value;
 
-    console.log('test');
-
     if (name === '') {
       console.log('Name cannot be empty');
     }
@@ -121,14 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
     var template_id = 'template_hWGS0MWW';
 
     // emailjsUser;
-    emailjs.send(service_id, template_id, template_params, emailjsUser).then(
-      (result) => {
-        console.log(result.text);
-      },
-      (error) => {
-        console.log(error.text);
-      }
-    );
+    // UNCOMMENT HERE FOR PRODUCTION
+    // emailjs.send(service_id, template_id, template_params, emailjsUser)
   }
 
   submitButton.addEventListener('click', submitForm);

@@ -82,19 +82,19 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #00000033;
+  background: #00000022;
   border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #eabf1099;
+  background: #00000033;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #eabf10bb;
+  background: #00000055;
 }
 
 // Global main Button
@@ -728,7 +728,7 @@ body {
       background-color: rgba(255, 255, 255, 0.2);
       border: none;
       color: $white;
-      font-size: 1.1em;
+      font-size: 0.9em;
       padding: 16px;
       border-radius: 6px;
       border: 1px solid rgba(0, 0, 0, 0);
@@ -736,7 +736,7 @@ body {
       resize: none;
 
       @include phone-height {
-        font-size: 0.9;
+        font-size: 0.8em;
         padding: 8px;
       }
     }
