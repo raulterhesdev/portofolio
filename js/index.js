@@ -90,8 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const subject = formSubject.value;
     const message = formMessage.value;
 
-    console.log(`${name} ${email} ${subject} ${message}`);
-
     if (name === '') {
       console.log('Name cannot be empty');
     }
