@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Delay to show the spinner even if page loads quick
-  for (let i = 0; i < 4000000000; i++) {}
+  for (let i = 0; i < 2000000000; i++) {}
 
   // Get the spinner and page content
   loader = document.getElementById('loader');
@@ -11,49 +11,36 @@ document.addEventListener('DOMContentLoaded', () => {
   content.style.display = 'block';
 
   // Navigation
-  function resetNavigation() {
-    hero.style.display = 'none';
-    projects.style.display = 'none';
-    contact.style.display = 'none';
-    about.style.display = 'none';
+
+  let currentWindow = '#hero';
+
+  function navigate(e) {
+    const target = event.currentTarget.href.slice(
+      event.currentTarget.href.indexOf('#')
+    );
 
     navHero.classList.remove('nav-active');
     navProjects.classList.remove('nav-active');
     navContact.classList.remove('nav-active');
     navAbout.classList.remove('nav-active');
-  }
 
-  function navigate(event) {
-    event.preventDefault();
-    const target = event.currentTarget.href.slice(
-      event.currentTarget.href.indexOf('#') + 1
-    );
     switch (target) {
-      case 'hero':
-        resetNavigation();
-
-        hero.style.display = 'grid';
+      case '#hero':
+        tlHero.restart();
         navHero.classList.add('nav-active');
         break;
-      case 'projects':
-        resetNavigation();
-
-        projects.style.display = 'block';
+      case '#projects':
+        tlProjects.restart();
         navProjects.classList.add('nav-active');
         break;
-      case 'contact':
-        resetNavigation();
-
-        contact.style.display = 'block';
+      case '#contact':
+        tlContact.restart();
         navContact.classList.add('nav-active');
         break;
-      case 'about':
-        resetNavigation();
-
-        about.style.display = 'block';
+      case '#about':
+        tlAbout.restart();
         navAbout.classList.add('nav-active');
         break;
-
       default:
         break;
     }
@@ -95,12 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const subject = formSubject.value;
     const message = formMessage.value;
 
-    const errorColor = '#ff1f5a';
     const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     if (name === '') {
       nameError.innerHTML = 'Please provide your name!';
-      // formName.style.borderColor = errorColor;
       formName.classList.add('input-error');
     }
     if (email === '') {
@@ -155,4 +140,28 @@ document.addEventListener('DOMContentLoaded', () => {
     formMessage.classList.remove('input-error');
     messageError.innerHTML = '';
   });
+
+  var tlHero = gsap.timeline();
+  tlHero.from('.animate-text', { x: -80, opacity: 0, stagger: 0.4 });
+  tlHero.from('.illustration', {
+    y: -80,
+    opacity: 0,
+    duration: 1,
+  });
+  tlHero.from('.action-area', {
+    y: 80,
+    opacity: 0,
+    duration: 0.5,
+  });
+
+  var tlProjects = gsap.timeline();
+  tlProjects.from('.project', { opacity: 0, stagger: 0.5 });
+
+  var tlAbout = gsap.timeline();
+  tlAbout.from('.short-intro', { opacity: 0, y: 80, duration: 0.5 });
+  tlAbout.from('.card', { opacity: 0, stagger: 0.5 });
+
+  var tlContact = gsap.timeline();
+  tlContact.from('.form-group', { opacity: 0, y: -50, stagger: 0.5 });
+  tlContact.from('.button-container', { opacity: 0, y: 50, stagger: 0.5 });
 });

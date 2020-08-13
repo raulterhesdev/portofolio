@@ -156,8 +156,10 @@ body {
 // Content - Initial Setup
 #content {
   // initially don't display the content
+  overflow: hidden;
   height: 100vh;
   display: none;
+  background-color: $background;
 }
 
 // Navigation
@@ -375,7 +377,7 @@ body {
 }
 
 #content #projects {
-  display: none;
+  display: block;
   min-height: 100vh;
   background-color: $background;
   overflow: hidden;
@@ -505,7 +507,7 @@ body {
 }
 
 #content #about {
-  display: none;
+  display: block;
   min-height: 100vh;
   background-color: $background;
   overflow: hidden;
@@ -688,7 +690,7 @@ body {
   }
 }
 #content #contact {
-  display: none;
+  display: block;
   min-height: 100vh;
   background-color: $background;
   overflow: hidden;
