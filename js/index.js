@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   content.style.display = 'block';
 
   // Navigation
-
-  let currentWindow = '#hero';
-
   function navigate(e) {
     const target = event.currentTarget.href.slice(
       event.currentTarget.href.indexOf('#')
@@ -115,8 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var template_id = 'template_hWGS0MWW';
 
     // emailjsUser;
-    // UNCOMMENT HERE FOR PRODUCTION
-    // emailjs.send(service_id, template_id, template_params, emailjsUser)
+    emailjs.send(service_id, template_id, template_params, emailjsUser);
   }
 
   submitButton.addEventListener('click', submitForm);
@@ -141,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     messageError.innerHTML = '';
   });
 
+  // Gsap timelines for each section
   var tlHero = gsap.timeline();
   tlHero.from('.animate-text', { x: -80, opacity: 0, stagger: 0.4 });
   tlHero.from('.illustration', {
