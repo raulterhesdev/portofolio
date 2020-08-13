@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // // Delay to show the spinner even if page loads quick
-  // for (let i = 0; i < 2000000000; i++) {}
+  // Delay to show the spinner even if page loads quick
+  for (let i = 0; i < 4000000000; i++) {}
 
   // Get the spinner and page content
   loader = document.getElementById('loader');
   content = document.getElementById('content');
 
-  // Switch from spinner to content when page loads
+  // // Switch from spinner to content when page loads
   loader.style.display = 'none';
   content.style.display = 'block';
 
@@ -83,6 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
   formSubject = document.getElementById('form-subject');
   formMessage = document.getElementById('form-message');
 
+  nameError = document.getElementById('form-name-error');
+  emailError = document.getElementById('form-email-error');
+  subjectError = document.getElementById('form-subject-error');
+  messageError = document.getElementById('form-message-error');
+
   function submitForm(e) {
     e.preventDefault();
     const name = formName.value;
@@ -90,22 +95,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const subject = formSubject.value;
     const message = formMessage.value;
 
+    const errorColor = '#ff1f5a';
+    const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
     if (name === '') {
-      console.log('Name cannot be empty');
+      nameError.innerHTML = 'Please provide your name!';
+      // formName.style.borderColor = errorColor;
+      formName.classList.add('input-error');
     }
     if (email === '') {
-      console.log('Email cannot be empty');
+      emailError.innerHTML = 'Please enter your email!';
+      formEmail.classList.add('input-error');
+    } else if (!emailRegex.test(email)) {
+      emailError.innerHTML = 'Please enter a valid email!';
+      formEmail.classList.add('input-error');
     }
     if (subject === '') {
-      console.log('Subject cannot be empty');
+      subjectError.innerHTML = 'Please provide a subject!';
+      formSubject.classList.add('input-error');
     }
     if (message === '') {
-      console.log('Message cannot be empty');
-    }
-
-    const reg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (!reg.test(email)) {
-      console.log('Please enter a valid email address');
+      messageError.innerHTML = 'Please enter your message';
+      formMessage.classList.add('input-error');
     }
 
     var template_params = {
@@ -124,4 +135,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   submitButton.addEventListener('click', submitForm);
+
+  formName.addEventListener('focus', function (e) {
+    formName.classList.remove('input-error');
+    nameError.innerHTML = '';
+  });
+
+  formEmail.addEventListener('focus', function (e) {
+    formEmail.classList.remove('input-error');
+    emailError.innerHTML = '';
+  });
+
+  formSubject.addEventListener('focus', function (e) {
+    formSubject.classList.remove('input-error');
+    subjectError.innerHTML = '';
+  });
+
+  formMessage.addEventListener('focus', function (e) {
+    formMessage.classList.remove('input-error');
+    messageError.innerHTML = '';
+  });
 });
