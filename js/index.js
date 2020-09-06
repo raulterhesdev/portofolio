@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.link-container').classList.toggle('nav-closed');
   });
 
+  // Close the navbar on first load if on phone
   if (window.innerWidth < 621) {
     document.querySelector('.toggle').classList.toggle('close');
     document.querySelector('.link-container').classList.toggle('nav-closed');
@@ -32,9 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
     navContact.classList.remove('nav-active');
     navAbout.classList.remove('nav-active');
 
+    // when navigating on a phone close the navbar
     if (window.innerWidth < 621) {
-      document.querySelector('.toggle').classList.toggle('close');
-      document.querySelector('.link-container').classList.toggle('nav-closed');
+      document.querySelector('.toggle').classList.remove('close');
+      document.querySelector('.link-container').classList.add('nav-closed');
     }
 
     switch (target) {

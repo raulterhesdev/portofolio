@@ -204,7 +204,6 @@ html {
     }
 
     span:nth-child(2) {
-      // width: 20px;
       transform: translateX(5px) rotate(180deg);
     }
 
@@ -431,7 +430,6 @@ html {
 }
 
 #content #projects {
-  // display: block;
   min-height: 100vh;
   background-color: $background;
   padding-top: 24px;
@@ -620,10 +618,6 @@ html {
         display: block;
       }
 
-      // @include phone-height {
-      //   max-height: 50vh;
-      // }
-
       @include tablet {
         width: 90%;
         margin: 20xp auto;
@@ -737,9 +731,6 @@ html {
   min-height: 100vh;
   background-color: $background;
 
-  .section-name {
-  }
-
   #form {
     display: flex;
     flex-direction: column;
@@ -816,6 +807,13 @@ html {
       margin: 5vh auto 0 auto;
     }
   }
+}
+
+footer {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: $primary;
+  padding: 18px 24px;
+  text-align: center;
 }
 
 #loader {
