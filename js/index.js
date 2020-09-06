@@ -10,6 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
   loader.style.display = 'none';
   content.style.display = 'block';
 
+  // Toggle navbar
+  document.querySelector('.toggle').addEventListener('click', (e) => {
+    e.currentTarget.classList.toggle('close');
+    document.querySelector('.link-container').classList.toggle('nav-closed');
+  });
+
   // Navigation
   function navigate(e) {
     const target = event.currentTarget.href.slice(
@@ -20,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     navProjects.classList.remove('nav-active');
     navContact.classList.remove('nav-active');
     navAbout.classList.remove('nav-active');
+
+    document.querySelector('.toggle').classList.toggle('close');
+    document.querySelector('.link-container').classList.toggle('nav-closed');
 
     switch (target) {
       case '#hero':
@@ -106,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       from_subject: subject,
       from_email: email,
       from_message: message,
+      website: 'Portfolio',
     };
 
     var service_id = 'gmail';
