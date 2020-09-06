@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
   for (let i = 0; i < 2000000000; i++) {}
 
   // Get the spinner and page content
-  loader = document.getElementById('loader');
-  content = document.getElementById('content');
+  const loader = document.getElementById('loader');
+  const content = document.getElementById('content');
 
   // // Switch from spinner to content when page loads
   loader.style.display = 'none';
@@ -61,22 +61,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  hero = document.getElementById('hero');
-  projects = document.getElementById('projects');
-  contact = document.getElementById('contact');
-  about = document.getElementById('about');
-  actionButton = document.getElementById('action-projects');
+  const hero = document.getElementById('hero');
+  const projects = document.getElementById('projects');
+  const contact = document.getElementById('contact');
+  const about = document.getElementById('about');
+  const actionButton = document.getElementById('action-projects');
 
-  navHero = document.getElementById('nav-hero');
-  navProjects = document.getElementById('nav-projects');
-  navContact = document.getElementById('nav-contact');
-  navAbout = document.getElementById('nav-about');
+  const navHero = document.getElementById('nav-hero');
+  const navProjects = document.getElementById('nav-projects');
+  const navContact = document.getElementById('nav-contact');
+  const navAbout = document.getElementById('nav-about');
 
   navHero.addEventListener('click', navigate);
   navProjects.addEventListener('click', navigate);
   navContact.addEventListener('click', navigate);
   navAbout.addEventListener('click', navigate);
   actionButton.addEventListener('click', navigate);
+
+  window.addEventListener('scroll', function (event) {
+    var scroll = this.scrollY;
+    if (scroll < hero.offsetHeight * 0.5) {
+      navHero.classList.add('nav-active');
+      navProjects.classList.remove('nav-active');
+      navContact.classList.remove('nav-active');
+      navAbout.classList.remove('nav-active');
+    } else if (scroll < hero.offsetHeight + projects.offsetHeight * 0.5) {
+      navHero.classList.remove('nav-active');
+      navProjects.classList.add('nav-active');
+      navContact.classList.remove('nav-active');
+      navAbout.classList.remove('nav-active');
+    } else if (
+      scroll <
+      hero.offsetHeight + projects.offsetHeight + about.offsetHeight * 0.5
+    ) {
+      navHero.classList.remove('nav-active');
+      navProjects.classList.remove('nav-active');
+      navContact.classList.remove('nav-active');
+      navAbout.classList.add('nav-active');
+    } else if (
+      scroll <
+      hero.offsetHeight +
+        projects.offsetHeight +
+        about.offsetHeight +
+        contact.offsetHeight * 0.5
+    ) {
+      navHero.classList.remove('nav-active');
+      navProjects.classList.remove('nav-active');
+      navContact.classList.add('nav-active');
+      navAbout.classList.remove('nav-active');
+    }
+  });
 
   // Contact form
   submitButton = document.getElementById('form-submit');
