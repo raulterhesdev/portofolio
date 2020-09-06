@@ -16,6 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.link-container').classList.toggle('nav-closed');
   });
 
+  if (window.innerWidth < 621) {
+    document.querySelector('.toggle').classList.toggle('close');
+    document.querySelector('.link-container').classList.toggle('nav-closed');
+  }
+
   // Navigation
   function navigate(e) {
     const target = event.currentTarget.href.slice(
@@ -27,8 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
     navContact.classList.remove('nav-active');
     navAbout.classList.remove('nav-active');
 
-    document.querySelector('.toggle').classList.toggle('close');
-    document.querySelector('.link-container').classList.toggle('nav-closed');
+    if (window.innerWidth < 621) {
+      document.querySelector('.toggle').classList.toggle('close');
+      document.querySelector('.link-container').classList.toggle('nav-closed');
+    }
 
     switch (target) {
       case '#hero':

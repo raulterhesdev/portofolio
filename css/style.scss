@@ -82,19 +82,20 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #00000022;
-  border-radius: 5px;
+  background: #242f3f;
+  // border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #00000033;
+  background: #eabf10aa;
   border-radius: 5px;
+  max-height: 15px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #00000055;
+  background: #eabf10dd;
 }
 
 // Global main Button
@@ -153,11 +154,14 @@ body {
   right: -20px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 // Content - Initial Setup
 #content {
   // initially don't display the content
-  // overflow: hidden;
-  height: 100vh;
+  height: 100%;
   display: none;
   background-color: $background;
 }
@@ -167,56 +171,52 @@ body {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  // overflow: hidden;
   z-index: 100;
 
-  @include phone {
-    width: auto;
-    flex-direction: column;
-
-    .nav-closed {
-      transform: translateX(-300px);
+  .toggle {
+    padding: 16px;
+    background-color: $background-transparent;
+    border-top-right-radius: 5px;
+    span {
+      display: block;
+      width: 25px;
+      height: 4px;
+      margin: 4px;
+      border-radius: 2px;
+      background-color: $primary;
+      transition: all 0.3s linear;
+      opacity: 1;
     }
 
-    .toggle {
-      padding: 16px;
-      span {
-        display: block;
-        width: 25px;
-        height: 4px;
-        margin: 4px;
-        border-radius: 2px;
-        background-color: $primary;
-        transition: all 0.5s linear;
-        opacity: 1;
-      }
-      transform-origin: left;
+    transition: all 0.3s linear;
+  }
+
+  .close {
+    transform: translateX(-7px);
+    span:first-child {
+      width: 15px;
+      transform: rotate(-45deg) translateY(5px) translateX(2px);
     }
 
-    .close {
-      span:first-child {
-        transform: rotate(-45deg);
-      }
+    span:nth-child(2) {
+      // width: 20px;
+      transform: translateX(5px) rotate(180deg);
+    }
 
-      span:nth-child(2) {
-        // width: 30px;
-        transform: translateX(7px);
-      }
-
-      span:last-child {
-        transform: rotate(45deg);
-      }
+    span:last-child {
+      width: 15px;
+      transform: rotate(45deg) translateY(-5px) translateX(2px);
     }
   }
 
   .link-container {
     transform: translateX(0);
-    transition: all 0.5s ease-in;
+    transition: all 0.4s ease-in;
     background-color: $background;
 
     .nav-link {
@@ -226,7 +226,7 @@ body {
       justify-content: center;
       flex-direction: column;
       transition: all 0.4s ease-in;
-      // max-width: 25vw;
+
       border-bottom: 3px solid rgba(0, 0, 0, 0);
       transition: all 0.5s ease-in;
 
@@ -250,6 +250,10 @@ body {
       border-bottom: 3px solid $primary;
     }
   }
+
+  .nav-closed {
+    transform: translateX(-300px);
+  }
 }
 
 // Hero Section
@@ -261,7 +265,6 @@ body {
     'intro image'
     'action image';
   padding: 40px;
-  // overflow: hidden;
 
   // Intro Text
   .intro {
@@ -424,14 +427,14 @@ body {
 .section-name {
   color: $primary;
   text-align: center;
-  // margin-top: 16px;
+  padding-top: 24px;
 }
 
 #content #projects {
-  display: block;
+  // display: block;
   min-height: 100vh;
   background-color: $background;
-  // overflow: hidden;
+  padding-top: 24px;
 
   .projects-grid {
     display: grid;
@@ -442,14 +445,14 @@ body {
     justify-content: center;
     grid-gap: 64px;
     margin-top: 18px;
-    height: 80vh;
-    overflow-y: auto;
-    overflow-x: hidden;
     padding: 0 12px;
+
+    @include phone {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
 
     .project {
       margin: 0 auto;
-      position: relative;
       z-index: 10;
       padding: 0;
 
@@ -485,7 +488,8 @@ body {
           width: 100%;
           max-width: 450px;
           opacity: 1;
-          transition: all 0.4s ease-in;
+          transition: all 0.2s ease-in;
+          transition-delay: 0.8s;
           margin: 0;
           z-index: 1;
           clip-path: polygon(
@@ -513,6 +517,7 @@ body {
           justify-content: space-between;
           opacity: 0;
           transition: all 0.4s ease-in;
+          transition-delay: 0.4s;
 
           .project-link {
             color: $primary;
@@ -520,6 +525,10 @@ body {
             flex-direction: column;
             align-items: center;
             padding: 3% 4%;
+
+            @include phone {
+              font-size: 0.9em;
+            }
           }
         }
       }
@@ -527,6 +536,8 @@ body {
       .project-container:hover {
         background-color: rgba(0, 0, 0, 0.2);
         img {
+          transition-delay: 0s;
+          transition: all 0.4s ease-in;
           clip-path: polygon(
             50% 0%,
             100% 0,
@@ -550,10 +561,6 @@ body {
     @include tablet {
       grid-gap: 32px;
     }
-
-    @include small {
-      height: 70vh;
-    }
   }
 }
 
@@ -561,10 +568,6 @@ body {
   display: block;
   min-height: 100vh;
   background-color: $background;
-  // overflow: hidden;
-
-  .section-name {
-  }
 
   .about-me {
     display: flex;
@@ -574,8 +577,6 @@ body {
     width: 90vw;
     max-width: 1080px;
     margin: 5vh auto;
-    // overflow-y: auto;
-    // max-height: 80vh;
 
     .short-intro {
       font-size: 1.1em;
@@ -607,8 +608,6 @@ body {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       grid-gap: 80px;
       width: 100%;
-      overflow-y: auto;
-      max-height: 60vh;
       align-items: center;
       justify-content: center;
 
@@ -621,17 +620,13 @@ body {
         display: block;
       }
 
-      @include phone-height {
-        max-height: 50vh;
-      }
+      // @include phone-height {
+      //   max-height: 50vh;
+      // }
 
       @include tablet {
         width: 90%;
         margin: 20xp auto;
-      }
-
-      @include small {
-        max-height: 40vh;
       }
 
       .card {
@@ -741,13 +736,11 @@ body {
   display: block;
   min-height: 100vh;
   background-color: $background;
-  // overflow: hidden;
 
   .section-name {
   }
 
   #form {
-    height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -771,7 +764,7 @@ body {
 
         @include phone-height {
           margin-top: 1vh;
-          font-size: 0.9bo;
+          font-size: 0.9em;
         }
       }
 
